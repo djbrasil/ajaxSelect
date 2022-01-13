@@ -13,24 +13,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <title>Teste send mail com Ajax</title>
+    <title>Select com Ajax</title>
 </head>
 
 <body> 
-    <div class="container p-5">
-        <h2>Teste send mail com Ajax</h2>
+    {% load widget_tweaks %}
+    <div class="container p-5"> 
         <div class="row">
             <div class="col-md-6 bg-light shadow-sm lead p-3">
                 <form method="post" id="solicitacaoForm" data-empresas-url="{% url 'ajax_load_empresas' %}">
                     {% csrf_token %} 
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="name" maxlength="124" required id="id_name">
+                        <label for="name">Qualquer nome</label>
+                        {% render_field form.name class="form-control" name="name" id="id_name" %}
                     </div> 
-                    <div class="form-group mt-3">  
-                        {{form.empresas}}
+                    <div class="form-group mt-3">   
+                        <label for="empresas">Selecionar Empresa</label>
+                        {% render_field form.empresas class="form-select" %}
                     </div> 
                     <div class="form-group mt-3">
-                        <textarea class="form-control" id="id_endereco" name="text" rows="10"></textarea>
+                        <label for="text">Endereço</label>
+                        {% render_field form.text class="form-control" rows="10" id="id_endereco" name="text" %} 
                     </div>
                     <div class="form-group mt-3">
                         <button type="submit" class="btn btn-success">Enviar</button>
@@ -38,7 +41,7 @@
                 </form>
             </div>
         </div>
-    </div> 
+    </div>
     <script>
         $("#id_empresas").change(function () {
             const url = $("#solicitacaoForm").attr("data-empresas-url"); 
@@ -56,14 +59,10 @@
                     }  
                 }
             });
-
             if (empresasId == '') {
                  $("#id_endereco").val(""); 
             }
-
         });
     </script>
-
 </body>
-
 </html>
