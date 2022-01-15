@@ -123,3 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# EMAIL_HOST = 'SMTP' 
+# EMAIL_HOST_USER = 'HOSTEMAIL' 
+# EMAIL_HOST_PASSWORD = 'SENHA' 
+# EMAIL_PORT = PORTA 
+# EMAIL_USE_TLS = True 
+# DEFAULT_FROM_EMAIL = 'EMAIL DEFAULT_FROM_EMAIL'
+# SERVER_EMAIL = DEFAULT_FROM_EMAIL
