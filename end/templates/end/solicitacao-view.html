@@ -1,0 +1,31 @@
+{% extends 'end/home.html' %}
+{% block body_home %} 
+<h2>Relatorios - Solicitação de Serviço</h2>
+<button class="btn btn-success" onclick="location.href='{% url 'solicitacao-novo' %}'">Nova Solicitação</button>
+<table class="text-center table table-bordered rounded mt-3 shadow-sm">
+        <thead>
+                <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">error</th> 
+                        <th scope="col">Enviar Email</th>
+                </tr>
+        </thead>
+        {% for rm in solicitacao %}
+        <tbody>
+                <tr>
+                        <td scope="row">{{ rm.id }}</td>
+                        <td scope="row">{{ rm.client_namefull }}</td>
+                        <td scope="row">{{ rm.client_email }}</td>
+                        <td scope="row">{{ rm.client_cnpjcpf }}</td>
+                        <td scope="row">{{ rm.client_error }}</td> 
+                        <td scope="row"> 
+                                <a class="mx-2 link-warning" href="{% url 'solicitacao-create' rm.pk %}">E-mail</a>
+                        </td>  
+                </tr>
+        </tbody>
+        {% endfor %}
+</table> 
+{% endblock %}

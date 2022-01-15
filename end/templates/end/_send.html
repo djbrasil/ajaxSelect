@@ -1,0 +1,58 @@
+
+{% extends 'end/home.html' %}
+{% block body_home %}
+{% load widget_tweaks %} 
+<div class="container p-5">
+        <div class="row">
+                <div class="col-md-6 bg-light shadow-sm lead p-3">
+                        <form method="post" id="solicitacaoForm" data-empresas-url="{% url 'ajax_load_empresas' %}">
+                                {% csrf_token %}
+                                <div class="form-group mt-3">
+                                        {% render_field form.cliente class="form-select" %}
+                                </div>
+                                <div class="form-group mt-3">
+                                        <label for="empresas">Selecionar Empresa</label>
+                                        {% render_field form.empresas class="form-select" %}
+                                </div>
+                                <div class="form-group mt-3">
+                                        <label for="text">Endereço</label>
+                                        {% render_field form.text class="form-control" rows="10" id="id_endereco" name="text" %}
+                                </div>
+                                <div class="form-group mt-3">
+                                        <button type="submit" class="btn btn-success">Enviar</button>
+                                </div>
+                        </form>
+                </div>
+
+                <div class="col-md-6 bg-light shadow-sm lead p-5">
+                        <h4>Informações do cliente</h4>
+                        <p>Nome: {{cliente.client_namefull}}</p>
+                        <p>E-mail: {{cliente.client_email}}</p>
+                        <p>Documento: {{cliente.client_cnpjcpf}}</p>
+                        <p>Descrição do Erro: {{cliente.client_error}}</p>
+                </div>
+        </div>
+</div>
+<script>
+        $("#id_empresas").change(function () {
+                const url = $("#solicitacaoForm").attr("data-empresas-url");
+                const empresasId = $(this).val();
+                console.log(empresasId);
+
+                $.ajax({
+                        url: url,
+                        data: {
+                                'empresas_id': empresasId
+                        },
+                        success: function (data) {
+                                if (data) {
+                                        $("#id_endereco").val(data);
+                                }
+                        }
+                });
+                if (empresasId == '') {
+                        $("#id_endereco").val("");
+                }
+        });
+</script>
+{% endblock %}

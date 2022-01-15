@@ -1,0 +1,29 @@
+{% extends 'end/home.html' %} 
+{% load widget_tweaks %}  
+{% block body_home %} 
+<h2>Fazer uma solicitação</h2> 
+<form method="POST" class="row g-3" name="form" autocomplete="off">
+        {% csrf_token %}  
+        <div class="col-md-4">
+                <div class="form-group mt-3">
+                        <label for="client_namefull">Nome Completo:</label>
+                        {% render_field form.client_namefull class="form-control" %}
+                </div>
+                <div class="form-group mt-3">
+                        <label for="client_email">E-mail:</label>
+                        {% render_field form.client_email class="form-control" type="email" %}
+                </div>
+                <div class="form-group mt-3">
+                        <label for="client_cnpjcpf">CPF:</label>
+                        {% render_field form.client_cnpjcpf class="form-control" %}
+                </div>
+                <div class="form-group mt-3">
+                        <label for="client_error">Descrição do Problema:</label>
+                        {% render_field form.client_error class="form-control" %}
+                </div>
+                <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-dark">Salvar</button>
+                </div>
+        </div> 
+</form>
+{% endblock %}
